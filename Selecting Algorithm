@@ -1,33 +1,31 @@
-// Online C++ compiler to run C++ program online
 #include <bits/stdc++.h>
 using namespace std;
-
 int main() {
-    int size;
-    cin>>size;
-    int arr[size];//array with size
-    //input
-    for(int i=0;i<size;i++){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
         cin>>arr[i];
     }
-    //logic
-    //Pointing the element the outer element 
-    int index=0;//elemnt for compairing first elemnt is smaller or not
-    for(int i=0;i<=size-2;i++){
-        index=i;
-        for(int j=i+1;j<size;j++){
-            if(arr[j]<arr[index]){
-                index=j;
+
+    //selection sort Logic
+    int midindex=0;
+    for(int i=0;i<n;i++){
+         midindex=i;
+        for(int j=i+1;j<n;j++){
+            if(arr[j]<arr[midindex]){
+                midindex=j;
             }
         }
-        if(index!=i){
-            swap(arr[index],arr[i]);
+    //Logic To check arr[1] is the smaller or not
+        if(i!=midindex){
+        swap(arr[i],arr[midindex]);
         }
     }
     
-    
     //output
-    for(int i=0;i<size;i++){
+    for(int i=0;i<n;i++){
         cout<<arr[i]<<" ";
     }
+    return 0;
 }
