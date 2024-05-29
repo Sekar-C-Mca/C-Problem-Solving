@@ -1,0 +1,41 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+using namespace std;
+void merge(vector<int>&arr,int low,int midindex,int high){
+    vector<int> temp;
+    int left=low;
+    int right=midindex+1;
+    
+    while(left<=midindex && right<=high){
+        if(arr[left]<=arr[right]){
+            temp.push_back(arr[left]);
+            left++;
+        }
+        else{
+            temp.push_back(arr[right]);
+            right++;
+        }
+    }
+    
+}
+//split the array into parts and to merge it.
+void mergeshort(vector<int>&arr,int low,int high){
+    if(arr[low]>=arr[high]) return;
+    int midindex=(low+high)/2;
+    mergeshort(arr,low,midindex);
+    mergeshort(arr,midindex+1,high);
+    merge(arr,low,midindex,high);
+}
+int main() {
+    vector<int> arr={9, 4, 7, 6, 3, 1, 5};
+    int n=7;
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " "  ;
+    }
+    cout << endl;
+    mergeshort(arr,0,n-1);
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " "  ;
+    }
+    
+}
