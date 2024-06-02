@@ -1,41 +1,60 @@
-// Online C++ compiler to run C++ program online
 #include <bits/stdc++.h>
 using namespace std;
-void merge(vector<int>&arr,int low,int midindex,int high){
-    vector<int> temp;
+void merge(vector <int> & arr,int low,int mid,int high){
+    vector <int> temp;
+    int right=mid+1;
     int left=low;
-    int right=midindex+1;
     
-    while(left<=midindex && right<=high){
+    while(left<=mid && right<=high){
         if(arr[left]<=arr[right]){
             temp.push_back(arr[left]);
             left++;
-        }
-        else{
+        }else{
             temp.push_back(arr[right]);
             right++;
         }
     }
     
+    while(left<=mid){
+        temp.push_back(arr[left]);
+        left++;
+    }
+    
+    while(right<=high){
+        temp.push_back(arr[right]);
+        right++;
+    }
+    int tempIndex = 0;
+    for(int i=low;i<=high;i++){
+        arr[i]=temp[tempIndex];
+        tempIndex++;
+    }
 }
-//split the array into parts and to merge it.
-void mergeshort(vector<int>&arr,int low,int high){
-    if(arr[low]>=arr[high]) return;
-    int midindex=(low+high)/2;
-    mergeshort(arr,low,midindex);
-    mergeshort(arr,midindex+1,high);
-    merge(arr,low,midindex,high);
+
+void mergeshort(vector <int> & arr,int low,int high){
+    if(low>=high) return;
+    int mid=(low+high)/2;
+    mergeshort(arr,low,mid);
+    mergeshort(arr,mid+1,high);
+    merge(arr,low,mid,high);
 }
+
 int main() {
-    vector<int> arr={9, 4, 7, 6, 3, 1, 5};
+    vector <int> arr={9, 4, 7, 6, 3, 1, 5};
     int n=7;
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " "  ;
+    //output before array
+    cout<<"The output of original array: ";
+    for(int i : arr){
+        cout<<i<<" ";
     }
-    cout << endl;
+    cout<<endl; 
+    
     mergeshort(arr,0,n-1);
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " "  ;
+    
+    cout<<"The output of sorted array: ";
+    for(int i : arr){
+        cout<<i<<" ";
     }
+
     
 }
